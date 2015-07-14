@@ -13,21 +13,12 @@ class MilestoneChecklistPlugin extends MantisPlugin{
 		$this->url = '';
 	}
 	
-	//create table in mysql for the plugin
-	/*function schema(){
-		return array(
-			array("CreateTableSQL", array(plugin_table("test"), "
-				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				name C(128) NOTNULL
-			"))
-		);
-	}*/
 	function schema() {
 		return array(
 			array('CreateTableSQL', array( plugin_table( 'milestone' ), "
 				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 				name C(128) NOTNULL,
-				description T NOTNULL
+				description Text NOTNULL
 				")),
 			array('CreateTableSQL', array( plugin_table( 'milesstone_categories' ), "
 				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
