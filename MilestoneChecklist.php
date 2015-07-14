@@ -14,23 +14,47 @@ class MilestoneChecklistPlugin extends MantisPlugin{
 	}
 	
 	//create table in mysql for the plugin
-	function schema(){
+	/*function schema(){
+		return array(
+			array("CreateTableSQL", array(plugin_table("test"), "
+				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				name C(128) NOTNULL
+			"))
+		);
+	}*/
+	function schema() {
+		return array(
+			array('CreateTableSQL', array( plugin_table( 'milestone' ), "
+				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				name C(128) NOTNULL,
+				description T NOTNULL
+				")),
+			array('CreateTableSQL', array( plugin_table( 'milesstone_categories' ), "
+				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				name C(128) NOTNULL
+				")),
+			array('CreateTableSQL', array( plugin_table( 'mile_cat_relation' ), "
+				mile_cat_id I NOTNULL,
+				milestone_id I NOTNULL,
+				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
+				")),
+			array('CreateTableSQL', array( plugin_table( 'milestones' ), "
+				mile_cat_id I NOTNULL,
+				milestone_id I NOTNULL,
+				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
+				")),
+		);
 	}
-
+	
 	function init(){
 		plugin_event_hook('EVENT_MENU_MAIN', 'MilestoneLink');
 	}
 	
+	//link on the menu	
 	function MilestoneLink(){
-		$project_id = 0;
-		echo '<a href="',plugin_page(''),'">Milestone</a> | ';
-	}
-
-	function hooks(){
-		return array();
+		echo '<a href="',plugin_page('milestonechecklist'),'">Milestone</a> | ';
 	}
 	
 	function config(){
-		return array('foo');
 	}
 }
