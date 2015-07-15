@@ -43,9 +43,10 @@ class MilestoneChecklistPlugin extends MantisPlugin{
 	
 	//link on the menu	
 	function MilestoneLink(){
-		echo '<a href="',plugin_page('milestonechecklist'),'">Milestone</a> | ';
+		echo '<a href="',plugin_page('main'),'">Milestone</a> | ';
 	}
 	
 	function config(){
 	}
 }
+?>
