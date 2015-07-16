@@ -32,6 +32,7 @@ class MilestoneChecklistPlugin extends MantisPlugin{
 			array('CreateTableSQL', array( plugin_table( 'milestones' ), "
 				mile_cat_id I NOTNULL,
 				milestone_id I NOTNULL,
+				project_id I NOTNULL,
 				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
 				")),
 		);
