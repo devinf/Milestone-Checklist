@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(-1);
 //main config page to add/remove milestones in a project, create milestones, and create categories
 
 html_page_top('Milestone Config');
@@ -6,6 +9,7 @@ require_once('core.php');
 require_once('project_api.php');
 require_once('helper_api.php');
 require_once('database_api.php');
+require_once('milestone_db_api.php');
 
 //get all projects in the database
 $all_project = project_get_all_rows();

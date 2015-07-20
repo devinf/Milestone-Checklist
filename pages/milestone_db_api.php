@@ -23,8 +23,20 @@ function get_project_milestones($id){
 	return to_array($query);	
 }
 
+//INSERT into milestone table
+function insert_into_milestone($array){
+	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_milestone_table (name, description) VALUES ('.db_param().','.db_param().')';
+	db_query_bound($query, $array);
+}
+
 //
-function insert_into_database($table, $array[]){
-	
+/*function insert_into_milestones($array[]){
+
+}*/
+
+//delete row in a table
+function delete_row($table, $id){
+	$query = 'DELETE FROM '.$table.' WHERE id = '.$id;
+	db_query_bound($query);
 }
 ?>
