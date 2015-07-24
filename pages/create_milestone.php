@@ -1,86 +1,42 @@
 <?php
-if(isset($_POST['milestone_name'])){
-	$arr = ARRAY($_POST['milestone_name'], $_POST['milestone_description']);
-	insert_into_milestone($arr);
+//fix later
+echo form_security_field( 'plugin_Milestone_config_update' );
+
+//form action to insert new milestone into milestone table
+if($_POST['submit']== 'add_milestone' && isset($_POST['milestone_name'])){
+	$new_milestone_info = ARRAY($_POST['milestone_name'], $_POST['milestone_description']);
+	insert_into_milestone($new_milestone_info);
 }
-if(isset($_POST['delete_milestone'])){
-	$id = $_POST['delete_milestone'];
-	delete_row('mantis_plugin_MilestoneChecklist_milestone_table', $id);
+
+//form action to delete milestone from database
+if($_POST['submit'] == 'delete_milestone' && isset($_POST['delete_milestone_id'])){
+	$delete_milestone_id = $_POST['delete_milestone_id'];
+	delete_data_milestoneid('mantis_plugin_MilestoneChecklist_milestone_table', $delete_milestone_id);
+	delete_data_milestoneid('mantis_plugin_MilestoneChecklist_catmileconn_table', $delete_milestone_id);
+	delete_data_milestoneid('mantis_plugin_MilestoneChecklist_promileconn_table', $delete_milestone_id);
 }
-echo form_security_field( 'plugin_Milestone_config_update' );?>
-<table class="width60" align="center">
-	<tr>
-		<td class="form-title">
-			Milestones
-		</td>
-	</tr>
-	<tr>
-		<td class="category" width="25%">
-			Name
-		</td>
-		<td class="category" width="60%">
-			Description
-		</td>
-		<td class="category" width="15%">
-		
-		</td>
-	</tr>
-<?php
+
 //output all the milestone in the database
-$all_milestone = get_all_milestone();
-$size = sizeof($all_milestone);
+$all_milestones = get_all_data('mantis_plugin_MilestoneChecklist_milestone_table');
+$size = sizeof($all_milestones);
 for($i = 0; $i < $size; $i++){
-	if($i % 2){
-	echo'<tr class="row-1">';
-	}else{
-	echo '<tr class="row-2">';
-	}	
-		echo'<form method="POST" name="delete_milestone" action="">';
-		echo'<td class="">';
-			echo $all_milestone[$i]['name'];
-		echo'</td>';
-		echo'<td class="">';
-			echo $all_milestone[$i]['description'];
-		echo'</td>';
-		echo'<td class="">';
-			echo '<input type="hidden" name="delete_milestone" value="'.$all_milestone[$i]['id'].'"></input>';
-			echo '<center>';
-			echo '<input type="submit" class="button" value="delete"></input>';
-			echo '</center>';
-		echo'</td>';
-		echo'</form>';
-	echo'</tr>';
+	$output .= ($i % 2) ? '<tr class="row-1">' : '<tr class="row-2">';
+		$output.= '<form method="POST" action="">';
+		$output.= '<td>';
+			$output.= $all_milestones[$i]['milestone_name'];
+		$output.= '</td>';
+		$output.= '<td>';
+			$output.= $all_milestones[$i]['milestone_description'];
+		$output.= '</td>';
+		$output.= '<td class="center">';
+			$output.= '<input type="hidden" name="delete_milestone_id" value="'.$all_milestones[$i]['milestone_id'].'"></input>';
+			$output.= '<input type="submit" name="submit" value="delete_milestone" class="button"></input>';
+		$output.= '</td>';
+		$output.= '</form>';
+	$output.= '</tr>';
 }
+
+include('tables/create_milestone_table.php');
+echo '<br>';
+include('tables/create_milestone_add_table.php');
 ?>
-</table>
-<br>
-<table class="width60" align="center">
-	<tr>
-		<td class="form-title" width="30%">
-			Create Milestones
-		</td>
-	</tr>
-	<form method="POST" name="add_milestone" action="">
-	<tr class="row-1">
-		<td class="category">	
-			Name:
-		</td>
-		<td>
-			<input type="text" name="milestone_name" size="100"></input>
-		</td>
-	</tr>
-	<tr class="row-2">
-		<td class="category">
-			Description:
-		</td>
-		<td>
-			<textarea name="milestone_description" rows="10" cols="72" style="resize:none;"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td class="center" colspan="3">
-			<input type="submit" class="button" value="add milestone"></input>
-		</td>
-	</tr>
-	</form>
-</table>

@@ -1,8 +1,0 @@
-<?php
-	
-?>
-
-<form action="">
-	
-	
-</form>

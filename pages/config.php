@@ -1,15 +1,16 @@
 <?php
+//main config page to add/remove milestones in a project, create milestones, and create categories
+
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
-//main config page to add/remove milestones in a project, create milestones, and create categories
 
 html_page_top('Milestone Config');
 require_once('core.php');
 require_once('project_api.php');
 require_once('helper_api.php');
 require_once('database_api.php');
-require_once('milestone_db_api.php');
+require_once('db_api.php');
 
 //get all projects in the database
 $all_project = project_get_all_rows();
@@ -17,13 +18,13 @@ $all_project = project_get_all_rows();
 //get the current project
 $current_project = helper_get_current_project();
 
-//navigate to different links
+//config navigation menu
 ?>
 <br>
 <br>
 <center>
 	[
-	<a href="plugin.php?page=MilestoneChecklist/config">Add/Remove Milestone</a>
+	<a href="plugin.php?page=MilestoneChecklist/config">Change Category</a>
 	] [ 
 	<a href="plugin.php?page=MilestoneChecklist/config&config=milestone">Create Milestones</a>
 	] [
@@ -34,12 +35,14 @@ $current_project = helper_get_current_project();
 
 <?php
 //determine what page is view in config
-if($_GET['config'] == 'categories'){
-	require('create_categories');
+if($_GET['config'] == 'categories' && $_POST['submit'] == 'edit'){
+	require('edit_categories.php');
+}else if($_GET['config'] == 'categories'){
+	require('create_categories.php');
 }else if($_GET['config'] == 'milestone'){
 	require('create_milestone.php');
 }else{
-	require('add_remove_milestone.php');
+	require('change_project_category.php');
 }
 
 html_page_bottom();

@@ -16,24 +16,29 @@ class MilestoneChecklistPlugin extends MantisPlugin{
 	function schema() {
 		return array(
 			array('CreateTableSQL', array( plugin_table( 'milestone' ), "
-				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				name C(128) NOTNULL,
-				description Text NOTNULL
+				milestone_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				milestone_name C(128) NOTNULL,
+				milestone_description Text NOTNULL
 				")),
-			array('CreateTableSQL', array( plugin_table( 'milesstone_categories' ), "
-				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
-				name C(128) NOTNULL
+			array('CreateTableSQL', array( plugin_table( 'category' ), "
+				category_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
+				category_name C(128) NOTNULL
 				")),
-			array('CreateTableSQL', array( plugin_table( 'mile_cat_relation' ), "
-				mile_cat_id I NOTNULL,
+			array('CreateTableSQL', array( plugin_table( 'catmileconn' ), "
+				category_id I NOTNULL,
 				milestone_id I NOTNULL,
-				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
+				category_milestone_connection_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
 				")),
-			array('CreateTableSQL', array( plugin_table( 'milestones' ), "
-				mile_cat_id I NOTNULL,
-				milestone_id I NOTNULL,
+			array('CreateTableSQL', array( plugin_table( 'procatconn' ), "
 				project_id I NOTNULL,
-				id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
+				category_id I NOTNULL,
+				project_category_connection_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
+				")),
+			array('CreateTableSQL', array(plugin_table('promileconn'), "
+				project_id I NOTNILL,
+				milestone_id I NOTNULL,
+				complete I NOTNULL,
+				project_milestone_connection_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
 				")),
 		);
 	}
