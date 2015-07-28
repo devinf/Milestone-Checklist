@@ -1,6 +1,4 @@
 <?php 
-//fix later
-echo form_security_field( 'plugin_Milestone_config_update' );
 
 //form action when category is changed
 if(isset($_POST['change_project_category'])){
@@ -21,7 +19,7 @@ if(isset($_POST['change_project_category'])){
 	$size = sizeof($new_category_milestones);
 	for($i = 0; $i < $size; $i++){
 		$insert_new_milestone = ARRAY($current_project, $new_category_milestones[$i]['milestone_id'], 0);
-		insert_into_project_milestone_connection('mantis_plugin_MilestoneChecklist_promileconn_table', $insert_new_milestone);	
+		insert_into_project_milestone_connection($insert_new_milestone);	
 	}	
 }
 
@@ -42,7 +40,7 @@ if(sizeof($current_category) != 0){
 		$output.= '</td>';
 		$output.= '<td>';
 			for($i=0; $i<$size; $i++){
-				$current_milestone = get_data_milestoneid($current_milestones[$i]['milestone_id']);
+				$current_milestone = get_data_milestoneid('mantis_plugin_MilestoneChecklist_milestone_table', $current_milestones[$i]['milestone_id']);
 				$output.= $current_milestone[0]['milestone_name'];
 				$output.= '<br>';
 			}

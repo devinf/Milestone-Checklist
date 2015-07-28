@@ -1,6 +1,4 @@
 <?php
-//fix later
-echo form_security_field( 'plugin_Milestone_config_update' );
 
 //execute insert function if add category is called
 if($_POST['submit'] == 'add_category'  && isset($_POST['category_name'])){

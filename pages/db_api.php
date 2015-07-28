@@ -51,7 +51,11 @@ function insert_into_category($array){
 	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_category_table (category_name) VALUES ('.db_param().')';
 	db_query_bound($query, $array);
 }
-
+//insert into category milestone table
+function insert_into_category_milestone_connection($array){
+	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_catmileconn_table (category_id, milestone_id) VALUES ('.db_param().','.db_param().')';
+	db_query_bound($query, $array);
+}
 //insert into project category connection table
 function insert_into_project_milestone_connection($array){
 	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_promileconn_table (project_id, milestone_id, complete) VALUES ('.db_param().','.db_param().','.db_param().')';
@@ -85,4 +89,9 @@ function delete_data_categoryid($table, $id){
 	db_query_bound($query);
 }
 
+//update column in a table
+function update_complete_milestone($id){
+	$query = 'UPDATE mantis_plugin_MilestoneChecklist_promileconn_table set complete = 1 WHERE project_milestone_connection_id =' .$id;
+	db_query_bound($query);
+}
 ?>

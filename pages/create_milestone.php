@@ -1,6 +1,4 @@
 <?php
-//fix later
-echo form_security_field( 'plugin_Milestone_config_update' );
 
 //form action to insert new milestone into milestone table
 if($_POST['submit']== 'add_milestone' && isset($_POST['milestone_name'])){

@@ -1,5 +1,6 @@
 <?php
 //main config page to add/remove milestones in a project, create milestones, and create categories
+echo form_security_field( 'plugin_Milestone_config_update' );
 
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
@@ -35,7 +36,7 @@ $current_project = helper_get_current_project();
 
 <?php
 //determine what page is view in config
-if($_GET['config'] == 'categories' && $_POST['submit'] == 'edit'){
+if($_GET['config'] == 'categories' && ($_POST['submit'] == 'edit' || $_POST['submit'] == 'add_milestone' || $_POST['submit'] == 'delete_milestone')){
 	require('edit_categories.php');
 }else if($_GET['config'] == 'categories'){
 	require('create_categories.php');
