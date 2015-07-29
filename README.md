@@ -1,2 +1,2 @@
 # Milestone-Checklist
-Milestone checklist for development or testing.
+Mantisbt plugin - Milestone checklist for development or testing.
