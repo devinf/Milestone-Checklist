@@ -31,11 +31,14 @@ class MilestoneChecklistPlugin extends MantisPlugin{
 				")),
 			array('CreateTableSQL', array( plugin_table( 'procatconn' ), "
 				project_id I NOTNULL,
+				project_category_id I NOTNULL,
+				project_category_id I NOTNULL,
 				category_id I NOTNULL,
 				project_category_connection_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY
 				")),
 			array('CreateTableSQL', array(plugin_table('promileconn'), "
-				project_id I NOTNILL,
+				project_id I NOTNULL,
+				project_category_id I NOTNULL,
 				milestone_id I NOTNULL,
 				complete I NOTNULL,
 				project_milestone_connection_id I NOTNULL UNSIGNED AUTOINCREMENT PRIMARY

@@ -15,7 +15,7 @@ if(isset($_POST['milestone_name']) && $_POST['submit'] == "add_milestone"){
 	$size = sizeof($all_project_with_category);
 	for($i=0; $i < $size; $i++){
 		for($j=0; $j < $size_of_added; $j++){
-			$arr = ARRAY($all_project_with_category[$i]['project_id'], $checkedMilestone[$j], 0);
+			$arr = ARRAY($all_project_with_category[$i]['project_id'], $all_project_with_category[$i]['project_category_id'], $checkedMilestone[$j], 0);
 			insert_into_project_milestone_connection($arr);
 		}
 	}

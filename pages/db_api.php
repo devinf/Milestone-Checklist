@@ -37,7 +37,11 @@ function get_data_milestoneid($table, $id){
 	return to_array($query);
 }
 
-
+//get data in database assocaite with project id and project category id
+function get_data_projectcategoryid($table, $id, $id2){
+	$query = 'SELECT * FROM '.$table.' WHERE project_id = '.$id.' AND project_category_id = '.$id2;
+	return to_array($query);
+}
 
 /********** FUNCTIONS TO ADD DATA **********/
 
@@ -58,12 +62,12 @@ function insert_into_category_milestone_connection($array){
 }
 //insert into project category connection table
 function insert_into_project_milestone_connection($array){
-	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_promileconn_table (project_id, milestone_id, complete) VALUES ('.db_param().','.db_param().','.db_param().')';
+	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_promileconn_table (project_id, project_category_id, milestone_id, complete) VALUES ('.db_param().','.db_param().','.db_param().','.db_param().')';
 	db_query_bound($query, $array);
 }
 //insert into project category connection table
 function insert_into_project_category_connection($array){
-	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_procatconn_table (project_id, category_id) VALUES ('.db_param().','.db_param().')';
+	$query = 'INSERT INTO mantis_plugin_MilestoneChecklist_procatconn_table (project_id, project_category_id, category_id) VALUES ('.db_param().','.db_param().','.db_param().')';
 	db_query_bound($query, $array);
 }
 
@@ -89,9 +93,22 @@ function delete_data_categoryid($table, $id){
 	db_query_bound($query);
 }
 
+//delete all column in a table associate with project id and project category id
+
+function delete_data_projectcategory_id($table, $id, $id2){
+	$query = 'DELETE FROM '.$table.' WHERE project_id = '.$id.' AND project_category_id = '.$id2;
+	db_query_bound($query);
+}
+
 //update column in a table
 function update_complete_milestone($id){
 	$query = 'UPDATE mantis_plugin_MilestoneChecklist_promileconn_table set complete = 1 WHERE project_milestone_connection_id =' .$id;
+	db_query_bound($query);
+}
+
+//reset all complete milestone to zero
+function reset_complete_to_zero($id){
+	$query = 'UPDATE mantis_plugin_MilestoneChecklist_promileconn_table set complete = 0 WHERE project_id =' .$id;
 	db_query_bound($query);
 }
 ?>

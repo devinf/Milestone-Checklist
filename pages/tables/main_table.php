@@ -8,7 +8,7 @@
 	<?php echo $output; ?>
 	<tr>
 		<td class="center" rowspan="2">
-			<input type="submit" name="submit" value="completed">
+			<input type="submit" name="submit" value="update">
 		</td>			
 	</tr>
 </table>

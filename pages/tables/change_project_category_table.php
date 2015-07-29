@@ -6,32 +6,15 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="category" width="20%">
-			Current Category
+		<td class="category" width="33%">
+			Project Category
 		</td>
-		<td class="category" width="55%">
+		<td class="category" width="33%">
 			Current Milestones
 		</td>
-		<td class="category" width="25%">
+		<td class="category" width="33%">
+			Current Category
 		</td>
 	</tr>
-	<?php echo $output; //print out table with category name and milestone name
-	
-	if($current_project != 0){	
-	//if the current_project doesn't not exist this section isn't executed
-	?>	
-	<tr>
-		<td colspan="3">
-			<form method="POST" name="change_category" action="">
-				<select name="change_project_category" onchange="document.forms.change_category.submit();">
-					<option value="0"> Select a Category</option>
-					
-					<?php for($i = 0; $i < $size; $i++){ 
-					echo '<option value="'.$all_category[$i]['category_id'].'" >'.$all_category[$i]['category_name'].'</option>';
-					} ?>
-				</select>
-			</form>
-		</td>
-	</tr>
-	<?php } ?>
+	<?php echo $output; //print out table with category name and milestone name ?>
 </table>
