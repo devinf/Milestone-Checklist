@@ -1,6 +1,6 @@
 <table class="width60" align="center">
 	<tr>
-		<td class="form-title" width="30%">
+		<td class="form-title">
 			Create Milestones
 		</td>
 	<tr>
